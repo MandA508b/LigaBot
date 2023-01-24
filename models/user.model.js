@@ -27,10 +27,12 @@ const schema = new db.Schema({
         default: 'User'
     },
     teamId: {// TODO : next 2 rows
-        type: String
+        type: String,
+        default:'0'
     },
     ligaId: {
-        type: String
+        type: String,
+        default:'0'
     },
     isBlocked: {
         type: Boolean,
