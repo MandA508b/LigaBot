@@ -1,1 +1,6 @@
 node_modules
+client/node_modules
+.idea
+.git
+client/.git
+client/.idea
