@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const router = require('./routers/index')
+const errorMiddleware = require('./middleware/errorHandlingMiddleware')
+
 const app = new express()
 const PORT = 5000 || process.env.PORT
 
@@ -10,6 +12,8 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }))
 app.use('/', router)
+app.use(errorMiddleware)
+
 
 async function start(){
     try{
