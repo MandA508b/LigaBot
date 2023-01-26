@@ -9,7 +9,7 @@ const AuthRequire = () => {
     console.log(token)
     return (
         token ?
-            <Users/>
+            <Outlet/>
             :
             <Navigate to="/login" state={{from: location}} replace/>
     );

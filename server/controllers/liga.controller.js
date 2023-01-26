@@ -4,13 +4,27 @@ const ApiError = require(`../errors/api.error`)
 class ligaController{
     async create(req, res, next){//TODO: add сhannelId
         try{
-            const {name, level, teamId} = req.body
-            if(!name || !level || !teamId ){
-                return next(ApiError.badRequest('!name || !level || !teamId'))
+            const {name, level} = req.body
+            if(!name || !level ){
+                return next(ApiError.badRequest('!name || !level'))
             }
-            const team = await ligaService.create(name, level, teamId)
+            const liga = await ligaService.create(name, level)
 
-            return res.json({team})
+            return res.json({liga})
+        }catch (e) {
+            next(e)
+        }
+    }
+
+    async getLigaById(req, res, next){//TODO: add сhannelId
+        try{
+            const {ligaId} = req.body
+            if(!ligaId ){
+                return next(ApiError.badRequest('!ligaId'))
+            }
+            const liga = await ligaService.getLigaById(ligaId)
+
+            return res.json({liga})
         }catch (e) {
             next(e)
         }

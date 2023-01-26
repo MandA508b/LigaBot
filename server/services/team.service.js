@@ -2,6 +2,18 @@ const Team = require('../../models/team.model')
 
 class teamController{
 
+    async findByLigaId(ligaId){
+        const teams = Team.findAll({ligaId})
+        return teams
+    }
+    async findTeamsByLigaId(ligaId){
+        const teams = await Team.find({ligaId})
+        return teams
+    }
+    async findTeamById(id){
+        const team = await Team.findById(id)
+        return team
+    }
     async create(name, ligaId){
         const team = await Team.create({name, ligaId})
 

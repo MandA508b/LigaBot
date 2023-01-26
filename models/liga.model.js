@@ -13,11 +13,7 @@ const schema = new db.Schema({
         type: String,
         required: true
     },
-    teamId: {
-        type: db.Schema.Types.ObjectId,
-        required: true
-    },
-    сhannelId: {
+    channelId: {
         type: String,
         default: "12345"
     }

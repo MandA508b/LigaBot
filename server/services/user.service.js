@@ -17,6 +17,8 @@ class UserController{// userData: [{userId: _id, updateData: {..data to update..
         return users
     }
 
+
+
 }
 
 module.exports = new UserController()

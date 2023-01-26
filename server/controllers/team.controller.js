@@ -29,7 +29,47 @@ class teamController{
             next(e)
         }
     }
+    async findByLigaId(req, res, next){
+        try{
+            const {ligaId} = req.body
+            if(!ligaId){
+                return next(ApiError.badRequest('!ligaId'))
+            }
+            const team = await teamService.findByLigaId( ligaId)
 
+            return res.json({team})
+        }catch (e) {
+            next(e)
+        }
+    }
+
+
+    async findTeamsByLigaId(req, res, next){
+        try{
+            const {ligaId} = req.body
+            if(!ligaId){
+                return next(ApiError.badRequest('!ligaId'))
+            }
+            const teams = await teamService.findTeamsByLigaId(ligaId)
+
+            return res.json({teams})
+        }catch (e) {
+            next(e)
+        }
+    }
+    async findTeamById(req, res, next){
+        try{
+            const {id} = req.body
+            if(!id){
+                return next(ApiError.badRequest('!id'))
+            }
+            const teams = await teamService.findTeamById(id)
+
+            return res.json({teams})
+        }catch (e) {
+            next(e)
+        }
+    }
     async redact(req, res, next){
         try{
             const {teamId, data} = req.body

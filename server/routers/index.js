@@ -2,8 +2,10 @@ const Router = require('express')
 const router = new Router()
 const userRouter = require('./user.router')
 const adminRouter = require('./admin.router')
-
+const teamsRouter = require('./team.router')
+const ligaRouter = require('./liga.router')
 router.use('/user', userRouter)
 router.use('/admin', adminRouter)
-
+router.use('/teams', teamsRouter)
+router.use('/ligas', ligaRouter)
 module.exports = router
