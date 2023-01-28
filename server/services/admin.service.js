@@ -1,7 +1,7 @@
 const Admin = require('../../models/admin.models')
 const bcrypt = require('bcrypt')
 const tokenService = require('../services/token.service')
-const AdminDto = require('../dtos/Admin.dto')
+const AdminDto = require('../dtos/admin.dto')
 const ApiError = require(`../errors/api.error`)
 
 class adminService{
