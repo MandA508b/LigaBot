@@ -3,6 +3,7 @@ import authReducer from "./auth/authSlice";
 import {apiSlice} from "./apiSlice";
 import usersReducer from './users/usersSlice'
 import ligasReducer from './ligas/ligasSlice'
+import cityReducer from './city/citySlice'
 import teamReducer from './teams/teamsSlice'
 export const store = configureStore({
     reducer: {
@@ -10,7 +11,8 @@ export const store = configureStore({
         users: usersReducer,
         auth: authReducer,
         ligas: ligasReducer,
-        teams:teamReducer
+        teams:teamReducer,
+        city:cityReducer,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
     //devTools: true

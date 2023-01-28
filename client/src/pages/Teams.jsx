@@ -130,13 +130,14 @@ const Teams = () => {
                         </ListItem>
                         <ListItem>
                             <Stack display={'flex'} flexDirection={'row'} gap={1}>
-                                <TextField sx={{width:140}} value={newName} onChange={e => setNewName(e.target.value)}
+                                <TextField sx={{width: 140}} value={newName} onChange={e => setNewName(e.target.value)}
                                            label='New Name'/>
                                 <Button variant={'contained'} onClick={handleRename}>Rename</Button>
                             </Stack>
                         </ListItem>
-                        <ListItem >
-                            <Button  sx={{height:54}} color={'error'} variant={'contained'} onClick={handleDelete}>Delete</Button>
+                        <ListItem>
+                            <Button sx={{height: 54}} color={'error'} variant={'contained'}
+                                    onClick={handleDelete}>Delete</Button>
                         </ListItem>
 
 
@@ -154,7 +155,7 @@ const Teams = () => {
                             <TableCell> <Checkbox checked={selectedTeams?.length === teams?.length}
                                                   onClick={() => selectAllTeams()}/></TableCell>
                             <TableCell align="center">Name</TableCell>
-                            <TableCell>Liga</TableCell>
+                            <TableCell align="center">Liga</TableCell>
                             <TableCell align="center">Status</TableCell>
                         </TableRow>
 

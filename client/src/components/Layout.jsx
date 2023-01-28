@@ -1,15 +1,23 @@
 import React from 'react';
-import {Stack, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Button, Stack, Typography} from "@mui/material";
+import {Link, useNavigate} from "react-router-dom";
 import {Outlet, useLocation} from "react-router";
+import {useDispatch} from "react-redux";
+import {logoutUser} from "../redux/auth/authSlice";
 
 const pages = ["users", "teams", 'ligas']
 const Layout = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const handleLogout =()=> {
+        dispatch(logoutUser())
+        navigate('/login')
+    }
     const location = useLocation()
 
     return (
         <>
-            <Stack display={'flex'} flexDirection={'row'} justifyContent={'space-evenly'} alignItems={'center'}
+            <Stack display={'flex'} flexDirection={'row'} alignItems={'center'}
                    justifyContent={"center"} gap={10} width={'100vw'}>
                 {
                     pages.map(page =>
@@ -20,6 +28,7 @@ const Layout = () => {
                             </Typography></Link>
                     )
                 }
+                <Button onClick={handleLogout}>Вийти</Button>
 
 
             </Stack>

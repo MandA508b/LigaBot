@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api,extraOption)=>{
     let result = await baseQuery(args, api,extraOption)
 
-    if(result?.error?.originalStatus === 401){
+    if(result?.error?.status === 401){
         console.log("send re token")
         const refreshResult = await baseQuery('/auth/refresh', api, extraOption)
         console.log(refreshResult)
@@ -34,6 +34,6 @@ const baseQueryWithReauth = async (args, api,extraOption)=>{
 export const apiSlice = createApi({
     reducerPath:"appApi",
     baseQuery: baseQueryWithReauth,
-    tagTypes:["Users","Ligas", "Teams"],
+    tagTypes:["Users","Ligas", "Teams","City"],
     endpoints:build=>({})
 })

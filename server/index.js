@@ -9,7 +9,7 @@ const PORT = 5000 || process.env.PORT
 app.use(express.json())
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000','https://heroic-profiterole-cc695c.netlify.app']
 }))
 app.use('/', router)
 app.use(errorMiddleware)

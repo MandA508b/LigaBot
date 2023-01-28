@@ -6,6 +6,7 @@ import AuthRequire from "./components/AuthRequire";
 import Teams from "./pages/Teams";
 import Ligas from "./pages/Ligas";
 import Layout from "./components/Layout";
+import City from "./pages/City";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path={'/'} element={<Users/>}/>
                     <Route path={'/teams'} element={<Teams/>}/>
                     <Route path={'/ligas'} element={<Ligas/>}/>
+                    <Route path={'/city'} element={<City/>}/>
                 </Route>
 
             </Route>
