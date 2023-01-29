@@ -5,7 +5,7 @@ class advertisementController{
     async create(req, res, next){
         try{
             const {name,userId,type,cityId,total,part,rate,deadline,extraInfo} = req.body
-            if(!name || !userId || !type,cityId || !total || !part || !rate || !deadline || !extraInfo){
+            if(!name || !userId || !type ||! cityId || !total || !part || !rate || !deadline || !extraInfo){
                 return next(ApiError.badRequest('!name || !userId || !type,cityId || !total || !part || !rate || !deadline || !extraInfo'))
             }
             const advertisement = await advertisementService.create(name,userId,type,cityId,total,part,rate,deadline,extraInfo)
