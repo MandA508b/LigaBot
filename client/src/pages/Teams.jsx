@@ -48,7 +48,7 @@ const Teams = () => {
     useEffect(() => {
         if (isSuccess) {
             dispatch(setTeams(data.teams))
-            setLigaId(data.teams[0]?._id)
+            setLigaId(data.teams[0]?._id || 'none')
         }
 
     }, [data])
