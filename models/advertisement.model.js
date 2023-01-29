@@ -11,7 +11,7 @@ const schema = new db.Schema({
     },
     leagueId:{
         type: db.Schema.Types.ObjectId,
-        default:'-'
+        default:'63d5abac8c57d24fa4077b28'
     },
     type: {
         type: String,
