@@ -6,7 +6,7 @@ const schema = new db.Schema({
         default: false
     },
     userId:{
-        type: db.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     leagueId:{
