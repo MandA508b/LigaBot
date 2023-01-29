@@ -11,11 +11,7 @@ const schema = new db.Schema({
     },
     leagueId:{
         type: db.Schema.Types.ObjectId,
-<<<<<<< HEAD
         required:true
-=======
-        default:'63d5abac8c57d24fa4077b28'
->>>>>>> 6e55377c88af4d76b7dc2eb943380709fab67fb1
     },
     type: {
         type: String,
