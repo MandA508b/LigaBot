@@ -14,10 +14,10 @@ class advertisementController{
         return advertisement
     }
 
-    async redact(cityId, data){
-        const city = await City.findByIdAndUpdate(cityId, data)
-        console.log(cityId, data)
-        return city
+    async redact(advertisementId, data){
+        const advertisement = await Advertisement.findByIdAndUpdate(advertisementId, data)
+        console.log(advertisementId, data)
+        return advertisement
     }
 
     async findAll(){

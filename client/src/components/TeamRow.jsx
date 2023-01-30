@@ -24,7 +24,7 @@ const TeamRow = ({team, isSelected}) => {
         <TableRow>
             <TableCell> <Checkbox checked={isSelected} onClick={()=>handleSelectTeam(team._id)}/></TableCell>
             <TableCell align="center">{team.name}</TableCell>
-            <TableCell>{name}</TableCell>
+            <TableCell align="center">{name}</TableCell>
             <TableCell align="center">{team.status ? "Опублікований" : 'Не Опублікований'}</TableCell>
         </TableRow>
     );

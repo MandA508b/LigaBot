@@ -16,12 +16,23 @@ import {useFetchAllUsersQuery, useUpdateUsersMutation} from "../redux/users/user
 import React, {useEffect, useState} from "react";
 import {useFetchAllTeamsQuery} from "../redux/teams/teamsApiSlice";
 import {selectCurrentTeams, setTeams} from "../redux/teams/teamsSlice";
+import {selectCurrentLigas, setLigas} from "../redux/ligas/ligasSlice";
+import {useFetchAllLigasQuery} from "../redux/ligas/ligasApiSlice";
 function refreshPage() {
     window.location.reload(false);
 }
 function Users() {
-    const {data:teamData, isSuccess:isTeamSuccess, isLoading:isLoadingSuccess} = useFetchAllTeamsQuery()
+    const {data:ligaData, isSuccess:ligaIsSuccess, isLoading:ligaIsLoading} = useFetchAllLigasQuery()
+
+    useEffect(() => {
+        if (ligaIsSuccess) {
+            dispatch(setLigas(ligaData.teams))
+            console.log(ligaData.teams)
+        }
+    }, [ligaData])
+    const {data:teamData, isSuccess:isTeamSuccess, isLoading:isTeamLoading} = useFetchAllTeamsQuery()
     const teams = useSelector(selectCurrentTeams)
+    const ligas = useSelector(selectCurrentLigas)
 
     useEffect(() => {
         if (isTeamSuccess) {
@@ -70,6 +81,22 @@ function Users() {
         await updateUsers({userData})
         refreshPage()
     }
+    const handleChangeLiga = async (e) => {
+        let userData = []
+        selectedUsers.forEach(id => {
+            const user = users.find(user => user._id === id)
+            userData.push({userId: user._id, updateData: {...user, ligaId: e.target.value}})
+        })
+        await updateUsers({userData})
+    }
+    const handleBlock = async (e) => {
+        let userData = []
+        selectedUsers.forEach(id => {
+            const user = users.find(user => user._id === id)
+            userData.push({userId: user._id, updateData: {...user, isBlocked:e.target.value}})
+        })
+        await updateUsers({userData})
+    }
     if (!isSuccess || isLoading) return <Typography textAlign={'center'}>Loading</Typography>
     return (
         <Stack style={{height: '100vh', width: '100vw'}} display={'flex'} alignItems={'center'} padding={2}>
@@ -77,27 +104,65 @@ function Users() {
                 !selectedUsers.length  && teams?.length ? null :
                     <Stack display={'flex'} alignItems={'center'} flexDirection={'row'}>
                         <ListItem>
-                            <Select defaultValue={false} sx={{width: '200px'}}
-                                    onChange={(e) => handlePublish(e.target.value)}>
-                                <MenuItem value={false}>
-                                    Не Опублікований
-                                </MenuItem>
-                                <MenuItem value={true}>
-                                    Опублікований
-                                </MenuItem>
-                            </Select>
+                            <Stack>
+                                <Typography fontSize={10} color={'grey'}>Block User</Typography>
+                                <Select sx={{width: '200px'}} defaultValue={''}
+                                        onChange={handleBlock}>
+                                    <MenuItem value={false}>
+                                        Розблокувати
+                                    </MenuItem>
+                                    <MenuItem value={true}>
+                                        Заблокувати
+                                    </MenuItem>
+                                </Select>
+                            </Stack>
+
 
                         </ListItem>
                         <ListItem>
-                            <Select defaultValue={'User'} sx={{width: '150px'}}
-                                    onChange={(e) => handleChangeRole(e.target.value)}>
-                                <MenuItem value={'Admin'}>
-                                    Адмін
-                                </MenuItem>
-                                <MenuItem value={'User'}>
-                                    Користувач
-                                </MenuItem>
-                            </Select>
+                            <Stack>
+                                <Typography fontSize={10} color={'grey'}>Status</Typography>
+                                <Select defaultValue={false} sx={{width: '200px'}}
+                                        onChange={(e) => handlePublish(e.target.value)}>
+                                    <MenuItem value={false}>
+                                        Не Опублікований
+                                    </MenuItem>
+                                    <MenuItem value={true}>
+                                        Опублікований
+                                    </MenuItem>
+                                </Select>
+                            </Stack>
+
+
+                        </ListItem>
+                        <ListItem>
+                            <Stack>
+                                <Typography fontSize={10} color={'grey'}>Role</Typography>
+                                <Select defaultValue={'User'} sx={{width: '150px'}}
+                                        onChange={(e) => handleChangeRole(e.target.value)}>
+                                    <MenuItem value={'Admin'}>
+                                        Адмін
+                                    </MenuItem>
+                                    <MenuItem value={'User'}>
+                                        Користувач
+                                    </MenuItem>
+                                </Select>
+                            </Stack>
+
+                        </ListItem>
+                        <ListItem>
+                            <Stack>
+                                <Typography fontSize={10} color={'grey'}>Select New Liga</Typography>
+                                <Select defaultValue={ligas[0]?._id} sx={{width: "120px"}}
+                                        onChange={handleChangeLiga}>
+                                    {
+                                        ligas?.map(liga =>
+                                            <MenuItem key={liga._id} value={liga._id}>{liga.name}</MenuItem>
+                                        )
+                                    }
+                                </Select>
+
+                            </Stack>
                         </ListItem>
                         <ListItem>
                             <Stack>
@@ -133,6 +198,7 @@ function Users() {
                             <TableCell align="center">Status</TableCell>
                             <TableCell align="center">Role</TableCell>
                             <TableCell align="center">Team</TableCell>
+                            <TableCell align="center">Liga</TableCell>
                         </TableRow>
 
                     </TableHead>
